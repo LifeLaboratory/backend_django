@@ -14,7 +14,7 @@ services:
     depends_on:
       - database
     volumes:
-      - ./static:/app/app/static
+      - ./static:/static
       
   database:
     image: postgres:13.0
@@ -38,28 +38,6 @@ services:
     depends_on:
       - web
         
-  grafana:
-    image: grafana/grafana
-    restart: always
-    expose:
-      - 3000
-    ports:
-      - 3000:3000
-    env_file:
-      - .env.dev
-    
-  clickhouse:
-    image: yandex/clickhouse-server
-    restart: always
-    expose:
-      - 8123
-      - 9000
-    ports:
-      - 9000:9000
-      - 8123:8123
-    volumes:
-      - ./clickhouse-config.xml:/etc/clickhouse-server/config.xml
-
 volumes:
   postgres_data:
 
